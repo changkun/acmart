@@ -1,0 +1,69 @@
+\input{style/mode}
+
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{wrapfig}
+\usepackage{glossaries}
+\usepackage{enumitem}
+\usepackage{xr}
+\usepackage{ifthen}
+\newboolean{major}
+\newboolean{suppl}
+\makeatletter
+\newcommand{\setword}[2]{#1\def\@currentlabel{\unexpanded{#1}}\label{#2}}
+\makeatother
+
+\newcommand{\confabbr}{CHI '22}
+\newcommand{\conffull}{\confabbr: ACM CHI Conference on Human Factors in Computing Systems}
+\newcommand{\confdate}{April 30 -- May 6 2022}
+\newcommand{\confloc}{New Orleans, LA, USA}
+\newcommand{\confsubid}{4242}
+
+\newcommand{\maintitle}{Catchy Title}
+\newcommand{\fulltitle}{\maintitle: We Have A Great Idea to Tell}
+\newcommand{\reflist}{refs/topic}
+\newcommand{\authorabbr}{Lastname et al.}
+\newcommand{\authorlist}{
+  \author{Author 1}
+  \email{email@address}
+  \orcid{0000-0000-0000-0000}
+  \affiliation{
+    \institution{Institution}
+    \city{City}
+    \country{Country}
+  }
+
+  \author{Author 2}
+  \email{email@address}
+  \orcid{0000-0000-0000-0000}
+  \affiliation{
+    \institution{Institution}
+    \city{City}
+    \country{Country}
+  }
+}
+
+\setacronymstyle{long-short}
+\newacronym{ta}{TA}{Term Abbr}
+
+\acmConference[\confabbr]{\conffull}{\confdate}{\confloc}
+\acmBooktitle{\conffull}
+\acmSubmissionID{\confsubid}
+
+\setcopyright{none}
+\settopmatter{printacmref=false, printccs=true, printfolios=true}
+
+\input{style/compile}
+\begin{document}
+\ifthenelse{\boolean{major}} {
+  \input{A-major}
+}{}
+\ifthenelse{\boolean{suppl}} {
+  \input{B-appendix}
+}{}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{\reflist}
+\end{document}
